@@ -1,0 +1,31 @@
+﻿<Window x:Class="Graphics.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graphics"
+        mc:Ignorable="d"
+        Background="LightGray"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Border CornerRadius="30" HorizontalAlignment="Left" Background="White">
+                <TextBlock
+                    Background="Transparent"
+                    HorizontalAlignment="Left"
+                    Padding="20"
+                    MinWidth="160"
+                    ClipToBounds="True"
+                    TextWrapping="Wrap"
+                    Text="Hello World!" />
+            </Border>
+            <Path
+                Margin="30,0"
+                HorizontalAlignment="Left"
+                Stroke="White"
+                Fill="White"
+                Data="M 0,0 c 25,5 10,60 50,50 c -10,-20 -10,-40 50,-50 L 0,0" />
+        </StackPanel>
+        <!--<Path Stroke="Black" Fill="LightGray" Data="M 0,0 l 50,50 l 50,-50 L 0,0" />-->
+    </Grid>
+</Window>

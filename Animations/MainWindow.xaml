@@ -1,0 +1,316 @@
+﻿<Window x:Class="Animations.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:comment="Namespace to use for comments. Remember to add it to mc:Ignorable."
+        xmlns:local="clr-namespace:Animations"
+        mc:Ignorable="d comment"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding EscapeKeyCommand}" />
+        <KeyBinding Key="Enter" Modifiers="Alt" Command="{Binding AltEnterKeyCommand}" />
+    </Window.InputBindings>
+    
+    <Window.Resources>
+        <!-- Built-in converter in System.Windows.Controls namespace. Returns Visible or Collapsed. -->
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+
+        <DoubleAnimationUsingKeyFrames
+            x:Key="DoubleAnimationUsingKeyFrames"
+            Storyboard.TargetName="txtPassword2"
+            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+            RepeatBehavior="5x">
+
+            <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.10" Value="5"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-5"/>
+            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+
+        <Style x:Key="ShakingTextBox" TargetType="TextBox">
+            <Style.Resources>
+                <Storyboard x:Key="ShakeStoryboard">
+                    <DoubleAnimation
+                        From="5"
+                        To="-5"
+                        RepeatBehavior="5x"
+                        comment:FillBehaviour="Needs to be Stop so that the control returns to its original position."
+                        FillBehavior="Stop"
+                        AutoReverse="True"
+                        Duration="0:0:0.1"
+                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                        />
+                </Storyboard>
+            </Style.Resources>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Width="10" Height="10" Fill="Red" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" />
+            <TextBox Grid.Row="1" Grid.Column="1"
+                 Panel.ZIndex="1"
+                 FontFamily="{StaticResource FontAwesome}"
+                 comment:Text="{Binding Path=(Panel.ZIndex), RelativeSource={RelativeSource Self}, StringFormat=ZIndex: {0}}"
+                 comment:Text2="{Binding Path=ZIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"
+                 x:Name="txtPassword"
+                 Margin="1"
+                 Width="250"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+                 Background="LightGreen">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="My ZIndex: {0}, Parents ZIndex: {1}">
+                        <Binding Path="(Panel.ZIndex)" RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="ZIndex" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Panel}" />
+                    </MultiBinding>
+                </TextBox.Text>
+                <TextBox.Resources>
+                    <Storyboard x:Key="TestStoryboard">
+                        <DoubleAnimation
+                        From="5"
+                        To="-5"
+                        RepeatBehavior="5x"
+                        comment:FillBehaviour="Needs to be Stop so that the control returns to its original position."
+                        FillBehavior="Stop"
+                        AutoReverse="True"
+                        Duration="0:0:0.1"
+                        Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                        />
+                    </Storyboard>
+                </TextBox.Resources>
+                <TextBox.RenderTransform>
+                    <TranslateTransform />
+                </TextBox.RenderTransform>
+            </TextBox>
+            <Rectangle Width="10" Height="10" Fill="Red" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" />
+
+            <Button x:Name="TheButton" Grid.Row="2" Grid.Column="1" Content="Shake the Green TextBox" Click="Button_Click">
+                <!--<Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click" SourceName="TheButton">
+                    <EventTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{DynamicResource ResourceKey=TestStoryboard}" />
+                        -->
+                <!--<BeginStoryboard Storyboard="{Binding Source={StaticResource TestStoryboard}, RelativeSource={RelativeSource txtPassword}}" />-->
+                <!--
+                    </EventTrigger.EnterActions>
+                </EventTrigger>
+            </Button.Triggers>-->
+            </Button>
+
+
+
+            <Rectangle Width="10" Height="10" Fill="Red" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" />
+            <TextBox Grid.Row="4" Grid.Column="1"
+                 x:Name="txtPassword2"
+                 Margin="1"
+                 Width="250"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+                 Background="LightBlue">
+                <TextBox.Resources>
+                    <!--<Storyboard x:Key="TestStoryboard2">
+                    <DoubleAnimationUsingKeyFrames
+                        Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                        RepeatBehavior="5x">
+                        
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.10" Value="5"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="-5"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>-->
+                </TextBox.Resources>
+                <TextBox.RenderTransform>
+                    <TranslateTransform />
+                </TextBox.RenderTransform>
+            </TextBox>
+            <Rectangle Width="10" Height="10" Fill="Red" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" />
+
+            <Button x:Name="TheButton2" Grid.Row="5" Grid.Column="1" Content="Shake the Blue TextBox">
+                <!--Click="TheButton2_Click">-->
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click" SourceName="TheButton2">
+                        <BeginStoryboard>
+                            <Storyboard
+                            Storyboard.TargetName="{
+                                Binding Name, RelativeSource={
+                                    RelativeSource Mode=FindAncestor, AncestorType=TextBox
+                            }}">
+
+                                <StaticResourceExtension ResourceKey="DoubleAnimationUsingKeyFrames" />
+                            </Storyboard>
+
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+
+
+
+            <Rectangle Width="10" Height="10" Fill="Red" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" />
+            <TextBox Grid.Row="7" Grid.Column="1"
+                 Style="{StaticResource ShakingTextBox}"
+                 x:Name="txtPassword3"
+                 Margin="1"
+                 Width="250"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+                 Background="LightPink"
+                 />
+
+            <Rectangle Width="10" Height="10" Fill="Red" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Left" />
+
+            <Button x:Name="TheButton3" Grid.Row="8" Grid.Column="1" Content="Shake the Pink TextBox">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click" SourceName="TheButton3">
+                        <!-- TODO: Figure out how to start the animation when the button is clicked. -->
+                        <!--<BeginStoryboard Storyboard="{StaticResource ResourceKey=ShakingTextBox.ShakeStoryboard}" />-->
+                        <!--<EventTrigger.EnterActions>
+                        
+            <BeginStoryboard Storyboard="{Binding Source={StaticResource TestStoryboard}, RelativeSource={RelativeSource txtPassword}}" />
+            
+                    </EventTrigger.EnterActions>-->
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>
+        
+        <!-- Docking overlay grid. -->
+        <Grid Visibility="{Binding OverlayVisible, Converter={StaticResource VisibleIfTrueConverter}}">
+            <Grid.Background>
+                <SolidColorBrush x:Name="OverlayBrush" Opacity="0.3" Color="Gray" />
+            </Grid.Background>
+
+            <!--<Grid.InputBindings>
+                <KeyBinding Key="Esc" Command="{Binding AltPressedCommand}" />
+            </Grid.InputBindings>-->
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <!--<Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Grid"></ControlTemplate>
+                        </Setter.Value>
+                    </Setter>-->
+                    <!--<Style.Triggers>
+                        <EventTrigger RoutedEvent="Keyboard.KeyDown">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard
+                                    comment:Storyboard.Target="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}"
+                                    Storyboard.TargetName="OverlayBrush"
+                                    Storyboard.TargetProperty="Opacity">
+
+                                        <DoubleAnimation Duration="0:0:0.3" To="0">
+
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>-->
+                </Style>
+            </Grid.Style>
+            <!-- Perimeter chevrons. -->
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Style="{StaticResource Chevron}"
+                Text="{StaticResource FontAwesomeChevronLeft}"
+                />
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Style="{StaticResource Chevron}"
+                Text="{StaticResource FontAwesomeChevronUp}"
+                />
+
+            <TextBlock
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Style="{StaticResource Chevron}"
+                Text="{StaticResource FontAwesomeChevronRight}"
+                />
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Style="{StaticResource Chevron}"
+                Text="{StaticResource FontAwesomeChevronDown}"
+                />
+
+            <!-- Center grid. -->
+            <Grid
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="200"
+                Width="200">
+
+                <!-- Center chevrons. -->
+                <TextBlock
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource Chevron}"
+                    Text="{StaticResource FontAwesomeChevronLeft}"
+                    />
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource Chevron}"
+                    Text="{StaticResource FontAwesomeChevronUp}"
+                    />
+
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource Chevron}"
+                    Text="{StaticResource FontAwesomeChevronRight}"
+                    />
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Style="{StaticResource Chevron}"
+                    Text="{StaticResource FontAwesomeChevronDown}"
+                    />
+
+                <!-- Center bars. -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource Chevron}"
+                    Text="{StaticResource FontAwesomeBars}"
+                    />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

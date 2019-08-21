@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfCommonLibrary.Styles">
+
+    <FontFamily x:Key="FontAwesome">/WpfCommonLibrary;component/Fonts/#FontAwesome</FontFamily>
+    <!--<FontFamily x:Key="FontAwesome">pack://application:,,,/WpfCommonLibrary;component/Fonts/#FontAwesome</FontFamily>-->
+    <!--<FontFamily x:Key="FontAwesome">pack://application:,,,/Fonts/#FontAwesome</FontFamily>-->
+</ResourceDictionary>

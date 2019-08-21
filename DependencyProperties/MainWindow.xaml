@@ -1,0 +1,90 @@
+﻿<Window x:Class="DependencyProperties.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DependencyProperties"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel>
+        <!--<CheckBox Checked="{Binding Path=IsGreen, ElementName=MyControl}" />-->
+        <CheckBox Content="Make Green (events)" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" />
+        <CheckBox Content="Make Green (binding)" IsChecked="{Binding Path=IsGreen, ElementName=MyControl}" />
+        
+        <local:MyUserControl x:Name="MyControl">
+            <local:MyUserControl.Style>
+                <Style TargetType="{x:Type local:MyUserControl}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="LightSkyBlue" />
+                        </Trigger>
+
+                        <Trigger Property="IsGreen" Value="True">
+                            <Setter Property="Background" Value="LightGreen" />
+                        </Trigger>
+                        <Trigger Property="IsGreen" Value="False">
+                            <Setter Property="Background" Value="LightSkyBlue" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </local:MyUserControl.Style>
+        </local:MyUserControl>
+
+        <Border Width="200" Height="100" Background="Aqua">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Background" Value="Aqua" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red" />
+                        </Trigger>
+                        <!--<Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="Gray" />
+                        </Trigger>-->
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+
+        <Rectangle
+            Height="100"
+            Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}">
+            <Rectangle.Style>
+                <Style TargetType="{x:Type Rectangle}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False" >
+                            <Setter Property="Fill" Value="Red" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" >
+                            <Setter Property="Fill" Value="Green" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Rectangle.Style>
+        </Rectangle>
+
+        <Rectangle
+            Height="100"
+            Width="200"
+            Fill="Purple"
+            RadiusX="60"
+            RadiusY="20" />
+
+        <TextBox Background="Orange" Text="This is some text">
+            <TextBox.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="5" Background="{TemplateBinding Background}">
+                        <!--<ContentPresenter />-->
+                        <ScrollViewer Margin="0"
+                            x:Name="PART_ContentHost" />
+                    </Border>
+                    
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>
+    </StackPanel>
+</Window>

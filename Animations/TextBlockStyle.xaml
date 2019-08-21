@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Animations">
+
+    <system:Double x:Key="ChevronSize">50</system:Double>
+    <Thickness x:Key="ChevronMargin">20</Thickness>
+    
+    <Style x:Key="Chevron" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+        <Setter Property="FontWeight" Value="ExtraBold" />
+        <Setter Property="FontSize" Value="{StaticResource ChevronSize}" />
+        <Setter Property="Margin" Value="{StaticResource ChevronMargin}" />
+        <Setter Property="Foreground" Value="Blue" />
+        <Style.Triggers>
+            <Trigger Property="TextBlock.IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="Gray" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- TODO: String constants should be moved to a more generic resource dictionary. -->
+    <system:String x:Key="FontAwesomeChevronLeft">&#xf053;</system:String>
+    <system:String x:Key="FontAwesomeChevronUp">&#xf077;</system:String>
+    <system:String x:Key="FontAwesomeChevronRight">&#xf054;</system:String>
+    <system:String x:Key="FontAwesomeChevronDown">&#xf078;</system:String>
+    <system:String x:Key="FontAwesomeBars">&#xf0c9;</system:String>
+
+</ResourceDictionary>

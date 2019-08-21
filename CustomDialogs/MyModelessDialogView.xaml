@@ -1,0 +1,55 @@
+﻿<Window x:Class="CustomDialogs.MyModelessDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:CustomDialogs"
+        mc:Ignorable="d"
+        Title="MyModelessDialog"
+        MinHeight="200"
+        MinWidth="400"
+        ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ToolWindow"
+        SizeToContent="WidthAndHeight"
+        >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding OnMyModelessDialogClosed}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Width="100" />
+
+        <Label
+            Grid.Column="1"
+            Grid.Row="0"
+            Content="{Binding Question}"
+            Margin="5"
+            />
+
+        <TextBox
+            Name="answerTextBox"
+            Grid.Column="1"
+            Grid.Row="1"
+            MinWidth="250"
+            Margin="5"
+            Text="{Binding Answer}"
+            />
+
+    </Grid>
+</Window>

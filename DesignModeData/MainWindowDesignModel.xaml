@@ -1,0 +1,11 @@
+﻿<Data:MainWindowViewModel
+    xmlns:Data="clr-namespace:DesignModeData"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <Data:MainWindowViewModel.People>
+        <System:String>Donald Duck</System:String>
+        <System:String>Garfield</System:String>
+        <System:String>Goofy</System:String>
+        <System:String>Homer Simpson</System:String>
+    </Data:MainWindowViewModel.People>
+</Data:MainWindowViewModel>
