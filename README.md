@@ -51,6 +51,9 @@ Set style with a template.
 #### TabControlTemplating
 Create a custom TabItem.HaderTemplate.
 
+#### TreeViewHierarchicalDataTemplate
+Using a HierarchicalDataTemplate in a TreeView.
+
 #### UIVirtualization
 An attempt to implement a custom virtualization for a ListBox.
 
