@@ -2,12 +2,12 @@
 
 ## Project Descriptions
 All projects in this solution are created for exploring the features of WPF.
-Each project focuesses on a specific feature and the number of source files
+Each project focuses on a specific feature and the number of source files
 are kept to a minimum. Most source files are located directly in the root of
 each project and any folder structure has been deliberately avoided.
 Project names followed by a check mark (&check;) in the list below
 are considered to be a more or less complete example. Projects without
-a check mark are considered to be work in progress.
+a check mark are considered to be a work in progress.
 
 #### Animations
 Some basic animations.
@@ -65,7 +65,7 @@ An attempt to implement a custom virtualization for a ListBox.
 "Binding" a PasswordBox to a SecureString.
 
 #### WpfCommonLibrary
-A class library for charing resources and code commonly used in WPF applications.
+A class library for sharing resources and code commonly used in WPF applications.
 
 #### WpfPlayground
 Random throwaway code.
