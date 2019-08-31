@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="TabThroughListViewUserControl.KeyValueItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TabThroughListViewUserControl"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static local:MainWindow.DesignData}">
+
+    <Border
+        Background="Transparent"
+        BorderThickness="0 0 0 1"
+        BorderBrush="Gray">
+
+        <Grid Margin="0">
+            <Grid.ColumnDefinitions>
+                <!--
+                All sub Grids of a Grid with Grid.IsSharedSizeScope="True" and
+                with the same SharedSizeGroup will have the same Width/Height.
+                -->
+                <ColumnDefinition SharedSizeGroup="KeyWidth" />
+                <ColumnDefinition SharedSizeGroup="ValueWidth" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Content="{Binding Key}"
+                Grid.Column="0"
+                Margin="0"
+                Padding="2 0"
+                VerticalAlignment="Bottom"
+                />
+
+            <!--
+            If TextBox.Width is not set the TextBox will get wider as the text
+            gets longer. When the width is set the text is scrolling out of
+            view. Thus the complete text is shown as a ToolTip. Also note
+            that IsTabStop is set to True to be able to tab through the
+            TextBoxes in a ListView.
+            -->
+            <TextBox
+                Background="Transparent"
+                BorderThickness="0"
+                Grid.Column="1"
+                IsTabStop="True"
+                Margin="0"
+                Padding="2 0"
+                Text="{Binding Value}"
+                ToolTip="{
+                    Binding Path=Text,
+                    RelativeSource={RelativeSource Self}
+                }"
+                Width="{
+                    Binding Path=TextBoxWidth,
+                    Mode=OneTime,
+                    RelativeSource={
+                        RelativeSource Mode=FindAncestor,
+                        AncestorType={x:Type local:KeyValueControl}
+                }}"/>
+        </Grid>
+    </Border>
+</UserControl>

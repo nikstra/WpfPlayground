@@ -51,6 +51,10 @@ Set style with a template.
 #### TabControlTemplating
 Create a custom TabItem.HaderTemplate.
 
+#### TabThroughListViewUserControl &check;
+Demonstrates how to set tab order on the TextBoxes in a ListView and using ItemContainerStyle
+and ItemTemplate. SharedSizeGroup is also used to share column width among Grids.
+
 #### TreeViewHierarchicalDataTemplate
 Using a HierarchicalDataTemplate in a TreeView.
 
