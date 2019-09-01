@@ -20,10 +20,10 @@ Modal and modeless dialogs.
 
 #### DependencyProperties &check;
 A dependency property on a UserControl changes the color of a rectangle
-when a checkbox is checked.
+when a check box is checked.
 
 #### DesignModeData &check;
-Demonstrates some different ways to populate design time viewmodels. It also
+Demonstrates some different ways to populate design time view models. It also
 demonstrates a way of using an ignorable namespace to add inline comments as
 XAML attributes.
 
