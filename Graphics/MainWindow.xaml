@@ -7,25 +7,34 @@
         mc:Ignorable="d"
         Background="LightGray"
         Title="MainWindow" Height="450" Width="800">
+
     <Grid>
-        <StackPanel>
+        <StackPanel Margin="30">
             <Border CornerRadius="30" HorizontalAlignment="Left" Background="White">
                 <TextBlock
                     Background="Transparent"
                     HorizontalAlignment="Left"
-                    Padding="20"
-                    MinWidth="160"
+                    Padding="20 10"
+                    MinWidth="120"
+                    MaxWidth="250"
                     ClipToBounds="True"
-                    TextWrapping="Wrap"
-                    Text="Hello World!" />
+                    TextWrapping="Wrap">
+                    
+                    Hello World! This is an example of a cartoon bubble.
+                </TextBlock>
             </Border>
+
             <Path
-                Margin="30,0"
+                Margin="0"
                 HorizontalAlignment="Left"
                 Stroke="White"
                 Fill="White"
-                Data="M 0,0 c 25,5 10,60 50,50 c -10,-20 -10,-40 50,-50 L 0,0" />
+                Data="
+                    M 30,0
+                    c 15,5 0,15 20,20
+                    c -5,-10 -10,-20 30,-20
+                    L 30,0
+                "/>
         </StackPanel>
-        <!--<Path Stroke="Black" Fill="LightGray" Data="M 0,0 l 50,50 l 50,-50 L 0,0" />-->
     </Grid>
 </Window>

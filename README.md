@@ -31,7 +31,7 @@ XAML attributes.
 Some testing of using gradients in every possible direction.
 
 #### Graphics
-Drawing shapes.
+Drawing shapes using path markup.
 
 #### GridSharedSizeGroup &check;
 Scoping SharedSizeGroup with Grid.IsSharedSizeScope. Using a ValueConverter
