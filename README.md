@@ -1,3 +1,9 @@
+<style type="text/css">
+h2, h3, h4, h5, h6 {
+    margin: 0 !important;
+}
+</style>
+
 # WPF Playground
 
 ## Project Descriptions
