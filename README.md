@@ -33,6 +33,11 @@ Some testing of using gradients in every possible direction.
 #### Graphics
 Drawing shapes.
 
+#### GridSharedSizeGroup &check;
+Scoping SharedSizeGroup with Grid.IsSharedSizeScope. Using a ValueConverter
+to determine text color depending on the perceived brightness of the
+background color.
+
 #### IrregularWindowShape
 Create a non-rectangular window.
 

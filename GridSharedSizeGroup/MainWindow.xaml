@@ -1,0 +1,252 @@
+﻿<Window x:Class="GridSharedSizeGroup.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GridSharedSizeGroup"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <local:ContrastColorConverter x:Key="ContrastColorConverter" />
+    </Window.Resources>
+
+    <Grid
+        Grid.IsSharedSizeScope="True"
+        ShowGridLines="True">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" SharedSizeGroup="A" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <!-- ########## First row ########## -->
+        <!-- Column one -->
+        <Border Grid.Column="0" Grid.Row="0" x:Name="cell00"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <GroupBox Header="Row 0 Columns" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Column[0].Width: {0}&#x0a;Column[1].Width: {1}&#x0a;Column[2].Width: {2}">
+                            <Binding Path="ActualWidth" ElementName="cell00" />
+                            <Binding Path="ActualWidth" ElementName="cell10" />
+                            <Binding Path="ActualWidth" ElementName="cell20" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </GroupBox>
+        </Border>
+
+        <!-- Column two -->
+        <Border Grid.Column="1" Grid.Row="0" x:Name="cell10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            
+            <!-- Inner Grid -->
+            <Grid Grid.IsSharedSizeScope="True"
+                Background="DarkGray"
+                ShowGridLines="True">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="A" Width="250" />
+                    <ColumnDefinition SharedSizeGroup="B" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Inner Grid column one -->
+                <Border Grid.Column="0" x:Name="cell1A0"
+                        Background="LightGray"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+
+                    <GroupBox
+                        Header="Gray Grid"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+
+                        <StackPanel>
+                            <CheckBox
+                                Content="IsSharedSizeScope"
+                                IsChecked="{
+                                    Binding Path=(Grid.IsSharedSizeScope),
+                                    RelativeSource={
+                                        RelativeSource Mode=FindAncestor,
+                                        AncestorType={x:Type Grid},
+                                        AncestorLevel=2
+                                }}" />
+                            <TextBlock ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="Column[0].Width: {0}&#x0a;Column[1].Width: {1}">
+                                        <Binding Path="ActualWidth" ElementName="cell1A0" />
+                                        <Binding Path="ActualWidth" ElementName="cell1B0" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                </Border>
+
+                <!-- Inner Grid column two -->
+                <Border Grid.Column="1" x:Name="cell1B0"
+                        Background="Gray"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        TextBlock.Foreground="{
+                            Binding Path=Background,
+                            RelativeSource={RelativeSource Self},
+                            Converter={StaticResource ContrastColorConverter}
+                        }">
+
+                    <TextBlock>Lorem ipsum</TextBlock>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Column three -->
+        <Border Grid.Column="2" Grid.Row="0" x:Name="cell20"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            
+            <GroupBox
+                HorizontalAlignment="Left"
+                Padding="5">
+
+                <GroupBox.Header>
+                    <TextBlock FontWeight="Bold" Text="Information" />
+                </GroupBox.Header>
+                
+                <TextBlock TextWrapping="Wrap">
+                    When IsSharedSizeScope (in the top middle cell) is checked the Grid within that cell
+                    starts its own SharedSizeScope. When unchecked the SharedSizeScope of the topmost Grid is used.
+                </TextBlock>
+            </GroupBox>
+        </Border>
+
+
+        <!-- ########## Second row ########## -->
+        <!-- Column one -->
+        <Border Grid.Column="0" Grid.Row="1" x:Name="cell01"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <GroupBox
+                Header="Row 1 Columns"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+
+                <TextBlock ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Column[0].Width: {0}&#x0a;Column[1].Width: {1}&#x0a;Column[2].Width: {2}">
+                            <Binding Path="ActualWidth" ElementName="cell01" />
+                            <Binding Path="ActualWidth" ElementName="cell11" />
+                            <Binding Path="ActualWidth" ElementName="cell21" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </GroupBox>
+        </Border>
+
+        <!-- Column two -->
+        <Border Grid.Column="1" Grid.Row="1" x:Name="cell11"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            
+            <!-- Inner Grid -->
+            <Grid
+                Background="DarkBlue"
+                ShowGridLines="True">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" SharedSizeGroup="A" />
+                    <ColumnDefinition Width="1*" SharedSizeGroup="B" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Inner Grid column one -->
+                <Border Grid.Column="0" x:Name="cell2A0"
+                        Background="LightBlue"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+
+                    <GroupBox
+                        Header="Blue Grid"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+
+                        <TextBlock ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="Column[0].Width: {0}&#x0a;Column[1].Width: {1}">
+                                    <Binding Path="ActualWidth" ElementName="cell2A0" />
+                                    <Binding Path="ActualWidth" ElementName="cell2B0" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </GroupBox>
+                </Border>
+
+                <!-- Inner Grid column two -->
+                <Border Grid.Column="1" x:Name="cell2B0"
+                        Background="Blue"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        TextBlock.Foreground="{
+                            Binding Path=Background,
+                            RelativeSource={RelativeSource Self},
+                            Converter={StaticResource ContrastColorConverter}
+                        }">
+
+                    <TextBlock>ASDF</TextBlock>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Column three -->
+        <Border Grid.Column="2" Grid.Row="1" x:Name="cell21"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                />
+
+
+        <!-- ########## Third row ########## -->
+        <!-- Column one -->
+        <Border Grid.Column="0" Grid.Row="2" x:Name="cell02"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <GroupBox Header="Row 2 Columns"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
+
+                <TextBlock ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Column[0].Width: {0}&#x0a;Column[1].Width: {1}&#x0a;Column[2].Width: {2}">
+                            <Binding Path="ActualWidth" ElementName="cell02" />
+                            <Binding Path="ActualWidth" ElementName="cell12" />
+                            <Binding Path="ActualWidth" ElementName="cell22" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </GroupBox>
+        </Border>
+        
+        <!-- Column two -->
+        <Border Grid.Column="1" Grid.Row="2" x:Name="cell12"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                />
+        
+        <!-- Column three -->
+        <Border Grid.Column="2" Grid.Row="2" x:Name="cell22"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                />
+    </Grid>
+</Window>

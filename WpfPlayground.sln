@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViewHierarchicalDataTem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabThroughListViewUserControl", "TabThroughListViewUserControl\TabThroughListViewUserControl.csproj", "{68719925-572F-42CB-BB2E-DABA10818EAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridSharedSizeGroup", "GridSharedSizeGroup\GridSharedSizeGroup.csproj", "{57FE3E36-30E0-4EB9-B7ED-CE708F644D65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +130,10 @@ Global
 		{68719925-572F-42CB-BB2E-DABA10818EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68719925-572F-42CB-BB2E-DABA10818EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68719925-572F-42CB-BB2E-DABA10818EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57FE3E36-30E0-4EB9-B7ED-CE708F644D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57FE3E36-30E0-4EB9-B7ED-CE708F644D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57FE3E36-30E0-4EB9-B7ED-CE708F644D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57FE3E36-30E0-4EB9-B7ED-CE708F644D65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
