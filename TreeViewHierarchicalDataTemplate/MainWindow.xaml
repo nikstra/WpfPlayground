@@ -4,18 +4,79 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreeViewHierarchicalDataTemplate"
+        xmlns:nm="clr-namespace:TreeViewHierarchicalDataTemplate.NodeModels"
         mc:Ignorable="d"
         x:Name="UI" 
         Title="MainWindow" Height="450" Width="800">
 
-    <StackPanel>
-        <TreeView DataContext="{Binding ElementName=UI, Path=TreeModel}" ItemsSource="{Binding Items}">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type local:NodeViewModel}" ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Name}" />
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
-        <Button Content="Click Me"  Click="Button_Click"/>
-    </StackPanel>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left hand side TreeView. -->
+        <GroupBox Header="TreeView 1" Grid.Column="0">
+            <StackPanel>
+                <!--
+                Using ElementName to bind DataContext.
+                -->
+                <TreeView DataContext="{Binding ElementName=UI, Path=TreeModel}" ItemsSource="{Binding Items}">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type local:NodeViewModel}" ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Name}" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+                <Button Content="Click Me"  Click="Button_Click" />
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Right hand side TreeView. -->
+        <GroupBox Header="TreeView 2" Grid.Column="1">
+            <!--
+            Using RelativeSource instead of ElementName to bind DataContext. Note that when setting
+            RelativeSource AncestorType or AncestorLevel, Mode is implicitly set to FindAncestor.
+            -->
+            <TreeView
+                DataContext="{
+                    Binding Path=NodesModel,
+                    RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
+                ItemsSource="{Binding Nodes}">
+                    
+                <TreeView.Resources>
+
+                    <!-- A couple of (Hierarchical)DataTemplates for the different types. -->
+                    <HierarchicalDataTemplate DataType="{x:Type nm:Node}" ItemsSource="{Binding Nodes}">
+                        <TextBlock Foreground="Brown" Text="{Binding Name}" />
+                    </HierarchicalDataTemplate>
+
+                    <HierarchicalDataTemplate DataType="{x:Type nm:SubNode}" ItemsSource="{Binding Nodes}">
+                        <StackPanel>
+                            <TextBlock Foreground="Orange">
+                                <Run Text="{Binding Name}" />
+                                <Run Text=" is a " />
+                                <!--
+                                Run binds TwoWay by default and causes an exeption when
+                                binding to the expression bodied (readonly) property
+                                SubName without speifying Mode.
+                                -->
+                                <Run Text="{Binding SubName, Mode=OneWay}" />
+                            </TextBlock> 
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+
+                    <DataTemplate DataType="{x:Type nm:Leaf}">
+                        <TextBlock Foreground="Green" Text="{Binding Name}" />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type nm:SubLeaf}">
+                        <TextBlock Foreground="LightGreen" Text="{Binding SubName}" />
+                    </DataTemplate>
+
+                </TreeView.Resources>
+            </TreeView>
+        </GroupBox>
+    </Grid>
 </Window>

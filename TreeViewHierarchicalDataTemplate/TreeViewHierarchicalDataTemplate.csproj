@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NodeModels\INode.cs" />
+    <Compile Include="NodeModels\Leaf.cs" />
+    <Compile Include="NodeModels\Node.cs" />
+    <Compile Include="NodeModels\NodesViewModel.cs" />
+    <Compile Include="NodeModels\SubLeaf.cs" />
+    <Compile Include="NodeModels\SubNode.cs" />
     <Compile Include="NodeViewModel.cs" />
     <Compile Include="TreeViewModel.cs" />
     <Page Include="MainWindow.xaml">

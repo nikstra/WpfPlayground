@@ -61,7 +61,7 @@ Demonstrates how to set tab order on the TextBoxes in a ListView and using ItemC
 and ItemTemplate. SharedSizeGroup is also used to share column width among Grids.
 
 #### TreeViewHierarchicalDataTemplate
-Using a HierarchicalDataTemplate in a TreeView.
+Using different HierarchicalDataTemplates and DataTemplates in a TreeView.
 
 #### UIVirtualization
 An attempt to implement a custom virtualization for a ListBox.
