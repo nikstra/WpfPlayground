@@ -83,6 +83,10 @@
                                         AncestorType={x:Type Grid},
                                         AncestorLevel=2
                                 }}" />
+                            <!--
+                            Note that AncestorLevel (above) refers to the level of
+                            AncestorType elements and not any XAML element.
+                            -->
                             <TextBlock ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}">
                                 <TextBlock.Text>
                                     <MultiBinding StringFormat="Column[0].Width: {0}&#x0a;Column[1].Width: {1}">

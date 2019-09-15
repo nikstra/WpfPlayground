@@ -19,22 +19,20 @@
                     ContentStringFormat="{TemplateBinding HeaderStringFormat}"
                     ContentSource="Header"
                     HorizontalAlignment="{
-                        Binding HorizontalContentAlignment, RelativeSource={
-                            RelativeSource FindAncestor, AncestorLevel=1, AncestorType={
-                                x:Type ItemsControl
-                            }
-                        }
-                    }"
+                        Binding HorizontalContentAlignment,
+                        RelativeSource={
+                            RelativeSource FindAncestor,
+                            AncestorType={x:Type ItemsControl}
+                    }}"
                     RecognizesAccessKey="True"
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                     VerticalAlignment="{
-                        Binding VerticalContentAlignment, RelativeSource={
-                            RelativeSource FindAncestor, AncestorLevel=1, AncestorType={
-                                x:Type ItemsControl
-                            }
-                        }
-                    }"
-                    />
+                        Binding VerticalContentAlignment,
+                        RelativeSource={
+                            RelativeSource FindAncestor,
+                            AncestorType={x:Type ItemsControl}
+                    }}" />
+
             </Border>
         </Grid>
         <ControlTemplate.Triggers>

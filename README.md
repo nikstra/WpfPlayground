@@ -60,7 +60,7 @@ Create a custom TabItem.HaderTemplate.
 Demonstrates how to set tab order on the TextBoxes in a ListView and using ItemContainerStyle
 and ItemTemplate. SharedSizeGroup is also used to share column width among Grids.
 
-#### TreeViewHierarchicalDataTemplate
+#### TreeViewHierarchicalDataTemplate &check;
 Using different HierarchicalDataTemplates and DataTemplates in a TreeView.
 
 #### UIVirtualization
