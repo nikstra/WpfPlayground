@@ -3,19 +3,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:TreeViewHierarchicalDataTemplate"
         mc:Ignorable="d"
         x:Name="UI" 
         Title="MainWindow" Height="450" Width="800">
 
+    <Window.Resources>
+        <!--<TreeViewItem x:Key="tvItem" x:Shared="False">-->
+        <!--<TreeViewItem x:Key="tvItem" x:Shared="False">-->
+        <Style TargetType="TreeViewItem" x:Shared="False">
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="TreeViewItem.Expanded">
+                    <i:InvokeCommandAction Command="{Binding HandleExpandCmd}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
+        </Style>
+    </Window.Resources>
+
     <StackPanel>
         <TreeView DataContext="{Binding ElementName=UI, Path=TreeModel}" ItemsSource="{Binding Items}">
+            <!-- For some reason the TreeViewItem.Expanded event does not fire or is handled somewhere else. -->
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="TreeViewItem.Expanded">
+                    <i:InvokeCommandAction Command="{Binding HandleExpandCmd}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
             <TreeView.Resources>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="local:Behaviours.ExpandingBehaviour" Value="{Binding OnNodeExpand}" />
+                </Style>
+            </TreeView.Resources>
+            <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type local:NodeViewModel}" ItemsSource="{Binding Children}">
                     <TextBlock Text="{Binding Name}" />
                 </HierarchicalDataTemplate>
-            </TreeView.Resources>
+            </TreeView.ItemTemplate>
         </TreeView>
-        <Button Content="Click Me"  Click="Button_Click"/>
+        <Button Content="Click Me" Click="Button_Click"/>
     </StackPanel>
 </Window>

@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
+using WpfCommonLibrary;
 
 namespace TreeViewHierarchicalDataTemplate
 {
@@ -21,21 +23,21 @@ namespace TreeViewHierarchicalDataTemplate
             TreeModel = new TreeViewModel
             {
                 Items = new ObservableCollection<NodeViewModel>
+                {
+                    new NodeViewModel
                     {
-                        new NodeViewModel
+                        Name = "Root", Children =  new ObservableCollection<NodeViewModel>
                         {
-                            Name = "Root", Children =  new ObservableCollection<NodeViewModel>
+                            new NodeViewModel
                             {
-                                new NodeViewModel
+                                Name = "Level1" ,  Children = new ObservableCollection<NodeViewModel>
                                 {
-                                    Name = "Level1" ,  Children = new ObservableCollection<NodeViewModel>
-                                    {
-                                        new NodeViewModel{ Name = "Level2"}
-                                    }
+                                    new NodeViewModel{ Name = "Level2"}
                                 }
                             }
                         }
                     }
+                }
             };
         }
 

@@ -1,11 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
+using WpfCommonLibrary;
 
 namespace TreeViewHierarchicalDataTemplate
 {
     public class NodeViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand OnNodeExpand { get; set; }
+
         private string _id;
         public string Id
         {
@@ -28,7 +35,6 @@ namespace TreeViewHierarchicalDataTemplate
             }
         }
 
-
         private ObservableCollection<NodeViewModel> _children;
         public ObservableCollection<NodeViewModel> Children
         {
@@ -40,7 +46,21 @@ namespace TreeViewHierarchicalDataTemplate
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public NodeViewModel()
+        {
+            OnNodeExpand = new RelayCommand(() =>
+            {
+                if(Children == null)
+                {
+                    Children = new ObservableCollection<NodeViewModel>();
+                }
+
+                Children.Add(new NodeViewModel
+                {
+                    Name = "New Level " + Children.Count,
+                });
+            });
+        }
 
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
